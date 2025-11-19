@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="icon_size_small">48dp</dimen>
+    <dimen name="icon_size_medium">56dp</dimen>
+    <dimen name="icon_size_large">72dp</dimen>
+
+    <dimen name="overlay_initial_x">30dp</dimen>
+    <dimen name="overlay_initial_y">100dp</dimen>
+
+</resources>

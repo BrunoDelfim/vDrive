@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">vDrive</string>
+
+    <string name="main_activity_toolbar_title">vDrive</string>
+    <string name="main_activity_permission_needed_title">Permissão Necessária</string>
+    <string name="main_activity_permission_needed_message">Para exibir o ícone flutuante, o vDrive precisa da permissão para &amp;Aparecer sobre outros apps&amp;.</string>
+    <string name="main_activity_permission_enable">Ativar Permissão</string>
+    <string name="main_activity_permission_cancel">Cancelar</string>
+    <string name="main_activity_overlay_permission_denied_toast">Permissão de sobreposição é necessária.</string>
+
+    <string name="settings_activity_toolbar_title">Configurações Ícone Flutuante</string>
+    <string name="settings_size_title">Tamanho do Ícone</string>
+    <string name="settings_size_small">Pequeno</string>
+    <string name="settings_size_medium">Médio</string>
+    <string name="settings_size_large">Grande</string>
+    <string name="settings_opacity_title">Opacidade</string>
+    <string name="settings_opacity_cancel">Cancelar</string>
+
+    <string name="overlay_service_notification_channel_id">OverlayServiceChannel</string>
+    <string name="overlay_service_notification_channel_name">Canal do Serviço vDrive</string>
+    <string name="overlay_service_notification_title">vDrive Ativo</string>
+    <string name="overlay_service_notification_text">O ícone flutuante está em execução.</string>
+    <string name="overlay_service_permission_denied_toast">Permissão de sobreposição é necessária.</string>
+    <string name="overlay_service_permission_needed_title">Permissão Necessária</string>
+    <string name="overlay_service_permission_needed_message">Para exibir o ícone flutuante, o vDrive precisa da permissão para &amp;Aparecer sobre outros apps&amp;.</string>
+
 </resources>

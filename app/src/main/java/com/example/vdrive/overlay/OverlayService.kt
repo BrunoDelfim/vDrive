@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import com.example.vdrive.R
 import com.example.vdrive.SettingsActivity
 import kotlin.math.roundToInt
@@ -46,19 +47,27 @@ class OverlayService : Service() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate() {
         super.onCreate()
 
-        positionPreferences = getSharedPreferences(POSITION_PREFS_NAME, Context.MODE_PRIVATE)
-        settingsPreferences = getSharedPreferences(SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE)
+        positionPreferences =
+            getSharedPreferences(POSITION_PREFS_NAME, Context.MODE_PRIVATE)
+        settingsPreferences =
+            getSharedPreferences(SettingsActivity.PREFS_NAME, Context.MODE_PRIVATE)
 
         val filter = IntentFilter(SettingsActivity.ACTION_UPDATE_SETTINGS)
+
+        val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Context.RECEIVER_NOT_EXPORTED
+        } else 0
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(settingsUpdateReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
         } else {
             @Suppress("DEPRECATION")
-            registerReceiver(settingsUpdateReceiver, filter)
+            registerReceiver(settingsUpdateReceiver, filter, flag)
         }
 
         setupOverlayView()
@@ -72,7 +81,8 @@ class OverlayService : Service() {
         val initialOpacity = getOpacity()
 
         params = WindowManager.LayoutParams(
-            initialSizePx, initialSizePx,
+            initialSizePx,
+            initialSizePx,
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
@@ -85,7 +95,6 @@ class OverlayService : Service() {
 
         windowManager.addView(overlayView, params)
 
-        // Este listener de toque agora não tem mais o "TESTE" de atualização
         overlayView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -152,7 +161,6 @@ class OverlayService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         // Retornamos START_STICKY para que o serviço tente reiniciar se for morto pelo sistema
-        // Este serviço NÃO é um foreground service aqui, então não precisa de notificação.
         return START_STICKY
     }
 }
